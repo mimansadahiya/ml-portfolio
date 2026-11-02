@@ -44,6 +44,19 @@ window.EXPERIENCE = [
     ]
   },
   {
+    role: "Behavioral Data Analyst",
+    org: "The Verse",
+    orgKind: "Professional",
+    location: "Remote",
+    period: "Aug 2026 – Present",
+    bullets: [
+      "Define behavioral, somatic, and social telemetry for a serious-games platform — capturing movement, gaze, and dialogue choices so gameplay itself becomes the measurement.",
+      "Design in-game assessment tools (affective sliders, stress checks, mood and affect grids) grounded in clinical research, replacing overt questionnaires.",
+      "Build the master telemetry data dictionary, mapping each game variable to a clinical construct such as DBT skills, VAS-A, SAM, and Epley's social-forecasting research.",
+      "Translate DBT adherence criteria into player-practice metrics — behavioral specificity, validation, and solution generation — for a UC Berkeley collaboration review."
+    ]
+  },
+  {
     role: "Ticket Sales Data Analyst Intern",
     org: "USF Athletics",
     orgKind: "Internship",
@@ -188,6 +201,28 @@ window.PROJECTS = [
           title: "The dashboard",
           body:
             "I personally built a Streamlit developer-profile explorer with developer ID search and dropdown selection, KPI cards (total activities, distinct interaction types, average activity score, longest inactivity gap, last seen), account, geographic and organizational details, an interaction-category bar chart, an event timeline, and a sortable raw activity table. The broader dashboard added pathway maps, a transition-probability matrix, cluster breakdowns, and predictive panels at the developer, organization, and country level."
+        },
+        {
+          type: "text",
+          title: "Predicting high-value developers",
+          body:
+            "After segmentation, the team built a predictive model that ranks <strong>every developer by predicted value over the next 90 days</strong> — surfacing the top 1% most likely to become high-value developers before they churn. The model reached <strong>25&times; more high-value developers than random outreach</strong> and scored <strong>4.92 million developers</strong> in the production run."
+        },
+        {
+          type: "panel",
+          dark: true,
+          title: "The predictive model",
+          intro: "Two complementary tracks: an enterprise-conversion classifier and a high-value developer ranking.",
+          blocks: [
+            {
+              type: "panelList",
+              items: [
+                { idx: "01", strong: "Enterprise conversion", text: "Random Forest and gradient boosting (LightGBM) on behavioral features; ROC-AUC rose from 0.63 to 0.77 after methodology improvements." },
+                { idx: "02", strong: "Key driver", text: "Breadth — developers who try more tools are the ones who rise." },
+                { idx: "03", strong: "High-value ranking", text: "A temporal snapshot predicting the top 1% of developers over the next 90 days, leak-audited before production." }
+              ]
+            }
+          ]
         },
         {
           type: "callout",
@@ -403,6 +438,14 @@ window.PROJECTS = [
           src: "assets/diagrams/ai-stock-flow.svg",
           caption:
             "Deterministic calculations run in parallel with grounded agent research, then meet at the synthesis agent."
+        },
+        {
+          type: "diagram",
+          dark: false,
+          title: "Product preview",
+          src: "assets/previews/ai-stock-preview.svg",
+          caption:
+            "Animated, illustrative preview of the dashboard — ticker input, deterministic valuation KPIs, a price chart, and the seven research agents. Values are illustrative, not real market data."
         },
         {
           type: "links",
