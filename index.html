@@ -139,14 +139,22 @@
         var status = p.status === "in-progress"
           ? '<span class="status-dot status-dot--wip">In progress</span>'
           : '<span class="status-dot status-dot--active">Completed</span>';
+        var prominent = p.org && p.org !== "Independent" && p.org !== "Cal Poly";
+        var orgHtml = prominent
+          ? '<div class="project-org--card" style="color:' + p.accent + ';font-size:2.1rem">' + A.escapeHtml(p.org) + '</div>'
+          : '';
+        var titleHtml = prominent
+          ? '<h3 style="font-size:1.35rem;margin:6px 0 10px"><a href="' + href + '">' + A.escapeHtml(p.title) + '</a></h3>'
+          : '<h3><a href="' + href + '">' + A.escapeHtml(p.title) + '</a></h3>';
         return (
           '<article class="featured-item reveal">' +
             '<div>' +
               '<div class="featured-item__meta">' +
                 '<span class="tag tag--accent">' + A.escapeHtml(A.categoryLabel(p.category)) + '</span>' + status +
               '</div>' +
-              '<h3><a href="' + href + '">' + A.escapeHtml(p.title) + '</a></h3>' +
-              (p.org || p.client ? '<div class="eyebrow eyebrow--muted" style="margin-bottom:10px">' + A.escapeHtml(p.client || p.org) + '</div>' : '') +
+              orgHtml +
+              titleHtml +
+              (p.client && !prominent ? '<div class="eyebrow eyebrow--muted" style="margin-bottom:10px">' + A.escapeHtml(p.client) + '</div>' : '') +
               '<p>' + A.escapeHtml(p.summary) + '</p>' +
               (p.shortRole ? '<p class="mono" style="font-size:12px;color:var(--muted)">' + A.escapeHtml(p.shortRole) + '</p>' : '') +
               '<div style="display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 18px">' + tags + '</div>' +

@@ -333,6 +333,47 @@ h1, h2, h3, h4 {
   max-width: 30em;
 }
 
+/* Prominent project/company name */
+.project-org {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  font-size: clamp(3rem, 11vw, 7rem);
+  text-transform: uppercase;
+  margin: 10px 0 2px;
+}
+
+.project-org--card {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-size: 1.55rem;
+  line-height: 1.02;
+  text-transform: uppercase;
+}
+
+/* Subtle card motion */
+.project-card__visual {
+  transition: transform 0.5s var(--ease);
+}
+
+.project-card__visual svg {
+  transition: transform 0.6s var(--ease);
+}
+
+.project-card:hover .project-card__visual svg {
+  transform: scale(1.06) translateY(-5px);
+}
+
+.featured-item__visual svg {
+  transition: transform 0.7s var(--ease);
+}
+
+.featured-item:hover .featured-item__visual svg {
+  transform: scale(1.05) translateY(-4px);
+}
+
 .nav__toggle {
   display: none;
   background: none;

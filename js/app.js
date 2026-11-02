@@ -140,6 +140,14 @@
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>'
       : '<span class="muted" style="font-size:13px">Case study coming soon</span>';
 
+    var prominent = project.org && project.org !== "Independent" && project.org !== "Cal Poly";
+    var orgHtml = prominent
+      ? '<div class="project-org--card" style="color:' + project.accent + '">' + escapeHtml(project.org) + '</div>'
+      : '';
+    var titleHtml = prominent
+      ? '<h3 style="font-size:1.12rem;margin-top:4px"><a href="' + href + '">' + escapeHtml(project.title) + '</a></h3>'
+      : '<h3><a href="' + href + '">' + escapeHtml(project.title) + '</a></h3>';
+
     return (
       '<article class="project-card reveal">' +
         '<a class="project-card__visual" href="' + href + '" aria-hidden="true" tabindex="-1">' + coverSVG(project, idx) + '</a>' +
@@ -148,8 +156,8 @@
             '<span class="tag tag--accent">' + escapeHtml(categoryLabel(project.category)) + '</span>' +
             statusMeta(project) +
           '</div>' +
-          '<h3><a href="' + href + '">' + escapeHtml(project.title) + '</a></h3>' +
-          (project.org ? '<div class="eyebrow eyebrow--muted" style="margin-top:-4px">' + escapeHtml(project.org) + '</div>' : '') +
+          orgHtml +
+          titleHtml +
           '<p class="project-card__summary">' + escapeHtml(project.summary) + '</p>' +
           '<div class="project-card__tags">' + tags + '</div>' +
           caseLink +

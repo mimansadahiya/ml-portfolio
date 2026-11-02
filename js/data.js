@@ -127,8 +127,8 @@ window.PROJECTS = [
     featured: true,
     accent: "#76b900",
     summary:
-      "Segmented a large developer population into behavioral archetypes to understand engagement, drop-off, and long-term adoption inside a developer program.",
-    shortRole: "Pod lead — data pipeline, feature engineering, segmentation, dashboard",
+      "Segmented NVIDIA's developer community into five behavioral archetypes to understand engagement, drop-off, and how to keep more developers active.",
+    shortRole: "Pod lead — data pipeline, feature engineering, segmentation, Streamlit dashboard",
     tech: ["Python", "pandas", "scikit-learn", "Streamlit", "Plotly"],
     links: {},
     caseStudy: {
@@ -136,12 +136,18 @@ window.PROJECTS = [
         "A Cal Poly client-sponsored project examining how developers move through a program ecosystem over time — where they engage, where they stall, and what separates sustained adoption from quiet churn.",
       blocks: [
         {
+          type: "text",
+          title: "The business problem",
+          body:
+            "Developer lifecycle information was scattered across activity logs, contact records, and SDK downloads — and with <strong>7.61 million registered developers</strong>, more than half went silent. NVIDIA needed one integrated view of who its developers are, where they drop off, and what keeps them active."
+        },
+        {
           type: "kpis",
           dark: false,
           items: [
-            { value: "4", label: "Behavioral archetypes identified", note: "Ghosts · Slow Starters · Rising Stars · Power Users" },
-            { value: "6", label: "Person pod I led", note: "within a larger multi-group engagement" },
-            { value: "2", label: "Clustering methods evaluated", note: "K-Means & agglomerative hierarchical" }
+            { value: "7.61M", label: "Registered developers analyzed", note: "across the developer program" },
+            { value: "5", label: "Behavioral archetypes", note: "identified via PCA + clustering" },
+            { value: "70 days", label: "Silence threshold for churn", note: "derived from survival analysis" }
           ]
         },
         {
@@ -158,76 +164,81 @@ window.PROJECTS = [
           team: {
             title: "What the team owned",
             items: [
-              "Markov-chain transition modeling.",
-              "Survival analysis.",
-              "React frontend and executive presentation development."
+              "Markov-chain transition modeling and pathway analysis.",
+              "Survival analysis and the churn definition.",
+              "Predictive modeling and organization/geographic analysis.",
+              "React frontend and executive presentation."
             ]
           }
         },
         {
           type: "text",
-          title: "Objective",
+          title: "Where developers drop off",
           body:
-            "The team analyzed millions of developer interaction records — engagement events, SDK downloads, and developer profiles — to understand <strong>engagement patterns, drop-off points, and behavioral archetypes</strong>. The broader goal was to map developer journeys and surface the factors associated with sustained adoption."
+            "Survival analysis showed the first week is the cliff: <strong>37% of quiet developers return at day 0, 16% by day 7, and only 5% by day 70</strong>. Most quiet developers stay quiet after day seven — which made week one the best window to re-engage them."
         },
         {
           type: "text",
           title: "Methodology",
           body:
-            "I tested <strong>K-Means</strong> and <strong>agglomerative hierarchical clustering</strong> and evaluated both with the <strong>Calinski-Harabasz</strong> and <strong>Davies-Bouldin</strong> scores. K-Means with four clusters gave the most interpretable segmentation, producing four behavioral archetypes:"
-        },
-        {
-          type: "list",
-          items: [
-            "<strong>Ghosts</strong> — signed up and disappeared quickly.",
-            "<strong>Slow Starters</strong> — gradual, delayed engagement.",
-            "<strong>Rising Stars</strong> — accelerating, increasingly active developers.",
-            "<strong>Power Users</strong> — sustained, high-frequency engagement."
-          ]
+            "We defined churn as <strong>70 days of silence</strong>, derived from a Kaplan-Meier survival analysis of 16.8 million developer silence periods. After PCA reduced developer behavior to five principal dimensions (15 components carrying ~81% of variance), clustering produced <strong>five behavioral archetypes</strong>. I explored both K-Means and hierarchical clustering as part of that segmentation work."
         },
         {
           type: "text",
           title: "The dashboard",
           body:
-            "I personally built a Streamlit developer-profile explorer with developer ID search and dropdown selection, KPI cards (total activities, distinct interaction types, average activity score, longest inactivity gap, last seen), account, geographic and organizational details, an interaction-category bar chart, an event timeline, and a sortable raw activity table."
+            "I personally built a Streamlit developer-profile explorer with developer ID search and dropdown selection, KPI cards (total activities, distinct interaction types, average activity score, longest inactivity gap, last seen), account, geographic and organizational details, an interaction-category bar chart, an event timeline, and a sortable raw activity table. The broader dashboard added pathway maps, a transition-probability matrix, cluster breakdowns, and predictive panels at the developer, organization, and country level."
         },
         {
           type: "callout",
           label: "Public disclosure",
           note: true,
           text:
-            "Real developer identifiers, organization names, internal contact details, and confidential records are not published. The demonstration below uses synthetic data and is an independent illustration — not actual NVIDIA data or company findings."
+            "Developer identifiers, organization names, internal contact details, and confidential records are not published. Aggregate figures above come from the final project presentation."
+        },
+        {
+          type: "text",
+          title: "Three actions NVIDIA could take",
+          body:
+            "The analysis closed with concrete, data-backed actions rather than a wall of charts:"
+        },
+        {
+          type: "list",
+          ordered: true,
+          items: [
+            "<strong>Shift activity focus</strong> for Passive Users and Training & Event Attendees, whose dominant activities (membership and DLI training) have the lowest retention.",
+            "<strong>Close the DLI loop within seven days</strong> — automatically route training graduates to topic-matched DevZone downloads and NGC containers, since most returning developers head to DevZone first.",
+            "<strong>Protect early power users</strong> — flag early-signal developers before they churn, while they're still active."
+          ]
         },
         {
           type: "panel",
           dark: true,
-          title: "Illustrative demonstration (synthetic data)",
+          title: "Five developer archetypes",
           intro:
-            "A representative view of the kind of analysis and dashboard this project produced, built from independently generated synthetic data.",
+            "Verified from the final presentation. Each archetype has a distinct behavior signature — and its own 'exit door.'",
           blocks: [
             {
-              type: "chart",
-              chartType: "donut",
-              title: "Behavioral segment mix",
-              caption: "Synthetic share of developers by archetype",
-              data: [
-                { label: "Ghosts", value: 34 },
-                { label: "Slow Starters", value: 26 },
-                { label: "Rising Stars", value: 22 },
-                { label: "Power Users", value: 18 }
+              type: "panelList",
+              items: [
+                { idx: "01", strong: "Passive Users · 61.0%", text: "Low-activity developers who enter through membership or basic DevZone actions." },
+                { idx: "02", strong: "Technical Power Users · 21.0%", text: "Highly active across the platform, but low event and training participation." },
+                { idx: "03", strong: "Training & Event Attendees · 13.5%", text: "Learning-oriented developers, driven by DLI training and events." },
+                { idx: "04", strong: "True Unicorns · 2.7%", text: "High-adoption benchmark users with balanced engagement across the ecosystem." },
+                { idx: "05", strong: "Casual Participants · 1.8%", text: "Selective, limited engagement in membership and participation programs." }
               ]
             },
             {
               type: "chart",
               chartType: "bar",
-              title: "Engagement distribution",
-              caption: "Synthetic activity-score histogram across the developer base",
+              title: "Archetype distribution",
+              caption: "Share of developers by archetype, from the final presentation",
               data: [
-                { label: "0–20", value: 38 },
-                { label: "20–40", value: 24 },
-                { label: "40–60", value: 17 },
-                { label: "60–80", value: 13 },
-                { label: "80–100", value: 8 }
+                { label: "Passive Users", value: 61 },
+                { label: "Technical Power Users", value: 21 },
+                { label: "Training & Event", value: 13.5 },
+                { label: "True Unicorns", value: 2.7 },
+                { label: "Casual Participants", value: 1.8 }
               ]
             }
           ]
@@ -264,7 +275,7 @@ window.PROJECTS = [
     status: "completed",
     type: "independent",
     featured: true,
-    accent: "#2563eb",
+    accent: "#b8934a",
     summary:
       "A multi-agent equity research system that combines deterministic financial calculations with seven grounded LLM research agents to produce a structured stock report.",
     shortRole: "Architecture, orchestration, three agents, dashboard, testing, docs",
@@ -416,131 +427,119 @@ window.PROJECTS = [
     featured: true,
     accent: "#c74634",
     summary:
-      "A graduate capstone that segmented enterprise accounts and built a risk-scoring framework to surface recurring-revenue churn risk.",
-    shortRole: "Data cleaning, segmentation, risk scoring, SQL, revenue-risk analysis",
+      "A Cal Poly capstone that segmented enterprise partners by product depth and support engagement, surfaced the two most at-risk customer types, and designed a retention-bundle strategy.",
+    shortRole: "SQL & data prep, segmentation, at-risk analysis, revenue & cross-sell, recommendations",
     tech: ["SQL", "Python", "scikit-learn", "pandas", "Quarto"],
     links: {},
     caseStudy: {
       lead:
-        "A Cal Poly client-sponsored capstone examining enterprise customer churn and recurring-revenue risk — who was likely to leave, how much revenue was exposed, and where an earlier intervention could have changed the outcome.",
+        "A Cal Poly client-sponsored capstone on enterprise churn. We segmented Oracle's partner base into nine customer types and found two at-risk segments — then designed a retention strategy that turns the biggest churn risk into a cross-sell opportunity.",
       blocks: [
+        {
+          type: "text",
+          title: "The business problem",
+          body:
+            "Enterprise churn quietly erodes recurring revenue. Oracle needed a structured way to identify at-risk accounts, understand churn signals, and prioritize retention — rather than reacting after a renewal is already at risk."
+        },
         {
           type: "kpis",
           dark: false,
           items: [
-            { value: "15", label: "Risk factors", note: "grouped into four categories" },
-            { value: "4", label: "Risk categories", note: "lifecycle · product · support · usage" },
-            { value: "2", label: "Clustering methods", note: "K-Means primary, hierarchical explored" }
+            { value: "9", label: "Customer types", note: "3 product-depth × 3 support-engagement segments" },
+            { value: "2", label: "At-risk segments", note: "Hidden Churners · Ghost Churners" },
+            { value: "14.5%", label: "ERP-only churn rate", note: "the highest, n = 386 partners" }
           ]
         },
         {
           type: "callout",
           label: "How to read the numbers",
-          note: false,
+          note: true,
           text:
-            "Revenue figures below come from the masked, anonymized project sample provided to the university — not from confidential Oracle financial reports."
+            "Figures come from the masked, anonymized project sample provided to the university — not from confidential Oracle financial reports."
         },
         {
           type: "text",
-          title: "Objective",
+          title: "What drives retention",
           body:
-            "Identify churn drivers, understand revenue exposure, and evaluate the relationship between product adoption and retention. The goal was a framework for <strong>earlier customer-success intervention</strong>, not just an after-the-fact churn report."
+            "Two signals stood out: <strong>product depth</strong> and <strong>service engagement</strong>. Partners with more products retained at consistently higher rates, and active partners made far more service requests (11.4 per month) than churned ones (1.6 per month). Together, product depth and engagement were the strongest behavioral drivers of retention."
+        },
+        {
+          type: "panel",
+          dark: true,
+          title: "Nine customer types",
+          intro:
+            "Partners were segmented across two dimensions — how many product pillars they use, and how actively they engage with support.",
+          blocks: [
+            {
+              type: "panelList",
+              items: [
+                { idx: "01", strong: "Product depth", text: "Single product · Multi-product · Full suite" },
+                { idx: "02", strong: "Support engagement", text: "Silent / low engagement · Active support · High-touch / engaged" },
+                { idx: "03", strong: "At-risk #1 — Hidden Churners", text: "Includes the 386 ERP-only partners — single-product accounts whose churn risk isn't obvious without analysis." },
+                { idx: "04", strong: "At-risk #2 — Ghost Churners", text: "At-risk accounts that have gone silent, flagged for proactive outreach." }
+              ]
+            },
+            {
+              type: "chart",
+              chartType: "bar",
+              title: "Churn falls as product depth grows",
+              caption: "Churn rate by product depth, from the final presentation (masked sample)",
+              data: [
+                { label: "ERP only", value: 14.5 },
+                { label: "ERP + SCM", value: 6.6 },
+                { label: "ERP + HCM + SCM", value: 1.4 }
+              ]
+            }
+          ]
         },
         {
           type: "roleSplit",
           mine: {
             title: "What I owned",
             items: [
-              "Data cleaning and pipeline standardization.",
-              "SQL extraction and joins, including resolving missing account identifiers.",
-              "Classification corrections and cohort construction.",
-              "Customer segmentation and the churn risk-scoring framework.",
-              "Cross-sell and revenue-risk analysis."
+              "SQL data extraction, joins, and preparation.",
+              "Data cleaning and validation — resolving missing account identifiers and misclassifications.",
+              "Customer segmentation and identifying the at-risk segments.",
+              "Revenue-exposure and cross-sell analysis.",
+              "Retention recommendations and executive communication."
             ]
           },
           team: {
             title: "What the team owned",
             items: [
               "Customer support-ticket analysis.",
-              "Regional patterns and visualization.",
+              "Regional and industry patterns.",
               "The final executive presentation."
             ]
           }
         },
         {
           type: "text",
-          title: "Workflow",
+          title: "The recommendation",
           body:
-            "The analytical workflow moved from raw data to a prioritized intervention list:"
+            "The analysis pointed to one actionable idea: <strong>deepen product adoption</strong>. The team built a retention-bundle strategy around it."
         },
         {
           type: "list",
-          ordered: true,
           items: [
-            "SQL extraction and table joins.",
-            "Missing account-identifier resolution.",
-            "Classification correction and exploratory analysis.",
-            "Contract and renewal-pattern analysis.",
-            "Customer segmentation (K-Means; hierarchical tested in exploration).",
-            "Multi-factor risk scoring.",
-            "Risk-tier prioritization and revenue-exposure analysis.",
-            "Retention recommendations."
+            "<strong>Foundation Bundle (ERP + SCM)</strong> — targets the 386 ERP-only partners, aiming to cut churn from 14.5% to 6.6%.",
+            "<strong>Enterprise Core Bundle (ERP + HCM + SCM)</strong> — the 'golden trio,' aiming to cut churn from 14.5% to 1.4%.",
+            "<strong>AI tiered pricing + usage-based credits</strong> — reward deeper usage and make expansion feel less like added cost.",
+            "<strong>Reach out before year one</strong> — flag ERP-only partners at sign-up and trigger bundle outreach by month eight."
           ]
         },
         {
-          type: "text",
-          title: "Segmentation",
-          body:
-            "K-Means was the primary clustering algorithm, validated with <strong>elbow analysis, silhouette analysis, and within-cluster sum of squares</strong>. Hierarchical clustering was tested during exploration. Segments were shaped by product breadth, account lifecycle, and account size."
-        },
-        {
-          type: "text",
-          title: "Risk scoring",
-          body:
-            "Rather than a conventional supervised classifier, I built a <strong>weighted scoring framework informed by statistical analysis</strong> — fifteen risk factors across four categories: contract & lifecycle patterns, product breadth, customer-support behavior, and platform-usage activity. The framework was evaluated on recall, ROC-AUC, precision, and business-capture metrics."
-        },
-        {
-          type: "panel",
-          dark: true,
-          title: "Illustrative demonstration (synthetic data)",
-          intro:
-            "An independent illustration of the kind of analysis this project produced. Not actual Oracle customer data or company findings.",
-          blocks: [
-            {
-              type: "chart",
-              chartType: "bar",
-              title: "Risk-tier distribution",
-              caption: "Synthetic distribution of accounts across risk tiers",
-              data: [
-                { label: "Critical", value: 14 },
-                { label: "High", value: 23 },
-                { label: "Medium", value: 34 },
-                { label: "Low", value: 29 }
-              ]
-            },
-            {
-              type: "panelList",
-              title: "The four risk-factor categories",
-              items: [
-                { idx: "01", strong: "Contract & lifecycle", text: "Renewal timing, tenure, contract structure." },
-                { idx: "02", strong: "Product breadth", text: "Number of products adopted and depth of use." },
-                { idx: "03", strong: "Support behavior", text: "Ticket volume, severity, and resolution friction." },
-                { idx: "04", strong: "Usage activity", text: "Platform activity levels and declining trends." }
-              ]
-            }
-          ]
-        },
-        {
-          type: "text",
-          title: "What we recommended",
-          body:
-            "Recommendations focused on immediate intervention for critical-risk accounts, cross-selling to increase product breadth, improving early product adoption, and monitoring support friction and usage decline as leading indicators. A standalone dashboard was <strong>not</strong> part of this project's scope."
+          type: "callout",
+          label: "No dashboard",
+          note: true,
+          text:
+            "This project did not include a standalone software dashboard. The deliverable was reproducible analysis (Python and Quarto) plus an executive recommendation deck."
         },
         {
           type: "text",
           title: "Deliverables & tools",
           body:
-            "Reproducible Python and Quarto code, customer segmentation, risk-tier classifications, prioritized intervention lists, and an executive recommendation deck. Tools: SQL, Python, pandas, NumPy, scikit-learn, Quarto, Excel."
+            "Reproducible Python and Quarto code, a nine-type customer segmentation, prioritized at-risk account lists, and an executive recommendation deck. Tools: SQL, Python, pandas, NumPy, scikit-learn, Quarto, and Excel."
         }
       ]
     }

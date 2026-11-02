@@ -129,11 +129,21 @@
         ? A.renderCaseStudy(project)
         : '<p class="muted">A detailed case study is being prepared for this project.</p>';
 
+      var prominentOrg = (project.org && project.org !== "Independent" && project.org !== "Cal Poly")
+        ? project.org : null;
+      var orgBlock = prominentOrg
+        ? '<div class="project-org" style="color:' + project.accent + '">' + A.escapeHtml(prominentOrg) + '</div>'
+        : '';
+      var titleTag = prominentOrg
+        ? '<h1 style="font-size:clamp(1.55rem,3.2vw,2.2rem);margin-top:20px">' + A.escapeHtml(project.title) + '</h1>'
+        : '<h1>' + A.escapeHtml(project.title) + '</h1>';
+
       root.innerHTML =
         '<section class="case-hero">' +
           '<div class="container">' +
             '<p class="eyebrow"><a href="projects.html" style="color:inherit">&larr; All projects</a></p>' +
-            '<h1>' + A.escapeHtml(project.title) + '</h1>' +
+            orgBlock +
+            titleTag +
             '<p class="case-hero__sub">' + A.escapeHtml(project.summary) + '</p>' +
             '<div class="case-meta">' + metaTags + '</div>' +
             heroLinks +
