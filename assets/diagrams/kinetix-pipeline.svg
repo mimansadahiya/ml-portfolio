@@ -1,0 +1,41 @@
+<svg viewBox="0 0 720 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kinetix processing pipeline: video upload, pose detection with 33 keypoints, joint angle and velocity math, smoothing, then the React dashboard">
+  <defs>
+    <marker id="ak" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8a8178"/>
+    </marker>
+  </defs>
+
+  <rect x="170" y="24" width="380" height="58" rx="10" fill="#2b2621" stroke="#3a342d"/>
+  <text x="360" y="50" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#f3efea">Video upload</text>
+  <text x="360" y="69" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#b6ada2">MP4 · MOV</text>
+
+  <line x1="360" y1="82" x2="360" y2="116" stroke="#8a8178" stroke-width="1.5" marker-end="url(#ak)"/>
+
+  <rect x="170" y="116" width="380" height="58" rx="10" fill="#2b2621" stroke="#7fc49a" stroke-width="1.5"/>
+  <text x="360" y="142" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#f3efea">Pose detection</text>
+  <text x="360" y="161" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#b6ada2">MediaPipe Pose · 33 anatomical keypoints</text>
+
+  <line x1="360" y1="174" x2="360" y2="208" stroke="#8a8178" stroke-width="1.5" marker-end="url(#ak)"/>
+
+  <rect x="170" y="208" width="380" height="58" rx="10" fill="#2b2621" stroke="#d98a6e" stroke-width="1.5"/>
+  <text x="360" y="234" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#f3efea">Kinematics</text>
+  <text x="360" y="253" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#b6ada2">knee · hip · elbow · torso angles · hip velocity</text>
+
+  <line x1="360" y1="266" x2="360" y2="300" stroke="#8a8178" stroke-width="1.5" marker-end="url(#ak)"/>
+
+  <rect x="170" y="300" width="380" height="58" rx="10" fill="#2b2621" stroke="#3a342d"/>
+  <text x="360" y="326" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#f3efea">Temporal smoothing</text>
+  <text x="360" y="345" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#b6ada2">5-frame moving average · noise reduction</text>
+
+  <line x1="360" y1="358" x2="360" y2="392" stroke="#8a8178" stroke-width="1.5" marker-end="url(#ak)"/>
+
+  <rect x="170" y="392" width="380" height="58" rx="10" fill="#2b2621" stroke="#7fc49a" stroke-width="1.5"/>
+  <text x="360" y="418" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#f3efea">Interactive dashboard</text>
+  <text x="360" y="437" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#b6ada2">React · Vite · Recharts · critiques · profiles</text>
+
+  <line x1="360" y1="450" x2="360" y2="484" stroke="#8a8178" stroke-width="1.5" marker-end="url(#ak)"/>
+
+  <rect x="170" y="484" width="380" height="58" rx="10" fill="#2b2621" stroke="#3a342d"/>
+  <text x="360" y="510" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#f3efea">Coaching feedback</text>
+  <text x="360" y="529" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#b6ada2">frame-linked critiques · recommended drills</text>
+</svg>

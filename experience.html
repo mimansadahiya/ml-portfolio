@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experience &amp; Skills — Mimansa Dahiya</title>
+  <meta name="description" content="Professional experience and skills — Mimansa Dahiya, Business Analytics graduate working in data science and applied AI.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <meta property="og:title" content="Experience &amp; Skills — Mimansa Dahiya">
+  <meta property="og:description" content="Professional experience and skills in data science and applied AI.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mimansadahiya.github.io/ml-portfolio/experience.html">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="nav__brand" href="index.html">Mimansa Dahiya<span>.</span></a>
+      <nav aria-label="Primary">
+        <ul class="nav__links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="experience.html" class="is-active">Experience</a></li>
+        </ul>
+      </nav>
+      <div class="nav__right">
+        <a class="btn btn--ghost nav__cta" href="assets/Mimansa-Dahiya-Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+        <button class="nav__toggle" aria-label="Open menu" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="case-hero">
+      <div class="container container--narrow">
+        <p class="eyebrow">Experience</p>
+        <h1>Where I've worked and what I can do.</h1>
+        <p class="case-hero__sub">Employment and skills, kept separate from the client-sponsored academic projects.</p>
+        <div class="case-links" style="margin-top:20px">
+          <a class="btn btn--accent" href="assets/Mimansa-Dahiya-Resume.pdf" target="_blank" rel="noopener">Download résumé</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-body">
+      <div class="container container--narrow">
+        <!-- Employment -->
+        <div class="case-section reveal">
+          <div class="case-section__head">
+            <span class="eyebrow">Employment</span>
+            <h2 style="margin:0">Professional experience</h2>
+          </div>
+          <div class="timeline" id="experience-list"></div>
+        </div>
+
+        <!-- Client-sponsored academic -->
+        <div class="case-section reveal">
+          <div class="case-section__head">
+            <span class="eyebrow">Academic</span>
+            <h2 style="margin:0">Client-sponsored projects</h2>
+          </div>
+          <p class="muted" style="margin-bottom:24px">
+            These were graduate projects completed through Cal Poly for client sponsors — not employment at those companies.
+          </p>
+          <div id="client-projects"></div>
+        </div>
+
+        <!-- Skills -->
+        <div class="case-section reveal">
+          <div class="case-section__head">
+            <span class="eyebrow">Skills</span>
+            <h2 style="margin:0">What I work with</h2>
+          </div>
+          <div class="skills-grid" id="skills-grid"></div>
+        </div>
+
+        <!-- Contact -->
+        <div class="case-section reveal">
+          <div class="contact-panel">
+            <p class="eyebrow">Get in touch</p>
+            <h2>Open to ML, data science, and analytics roles.</h2>
+            <p>Full résumé, LinkedIn, and GitHub below.</p>
+            <div class="contact-panel__actions">
+              <a class="btn btn--accent" href="mailto:dahiya.mimansa@gmail.com">Email me</a>
+              <a class="btn btn--ghost-invert" href="assets/Mimansa-Dahiya-Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+              <a class="btn btn--ghost-invert" href="https://www.linkedin.com/in/mimansa-dahiya" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a class="btn btn--ghost-invert" href="https://github.com/mimansadahiya" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div>
+        <div style="font-family:var(--font-display);font-weight:600;font-size:18px">Mimansa Dahiya</div>
+        <div class="site-footer__meta">© 2026 · Seattle, WA</div>
+      </div>
+      <div class="site-footer__links">
+        <a href="mailto:dahiya.mimansa@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/mimansa-dahiya" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/mimansadahiya" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="assets/Mimansa-Dahiya-Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    (function () {
+      var A = window.App;
+      var E = window.EXPERIENCE;
+      var S = window.SKILLS;
+      var P = window.PROJECTS;
+
+      // Employment timeline
+      document.getElementById("experience-list").innerHTML = E.map(function (e) {
+        var bullets = e.bullets.map(function (b) { return "<li>" + A.escapeHtml(b) + "</li>"; }).join("");
+        return (
+          '<div class="timeline-item">' +
+            '<div class="timeline-item__date">' + A.escapeHtml(e.period) + ' · ' + A.escapeHtml(e.location) + '</div>' +
+            '<h3>' + A.escapeHtml(e.role) + '</h3>' +
+            '<div class="timeline-item__org">' + A.escapeHtml(e.org) + '</div>' +
+            '<ul>' + bullets + '</ul>' +
+          '</div>'
+        );
+      }).join("");
+
+      // Client-sponsored academic projects (NVIDIA, Oracle)
+      var clientProjects = P.filter(function (p) { return p.client && p.type === "academic"; });
+      document.getElementById("client-projects").innerHTML = clientProjects.map(function (p, i) {
+        var href = "project.html?project=" + encodeURIComponent(p.id);
+        var tags = (p.tech || []).slice(0, 4).map(function (t) {
+          return '<span class="tag">' + A.escapeHtml(t) + '</span>';
+        }).join("");
+        return (
+          '<article class="featured-item reveal" style="margin-bottom:16px;border:1px solid var(--line);border-radius:var(--radius)">' +
+            '<div>' +
+              '<h3 style="margin-bottom:4px"><a href="' + href + '">' + A.escapeHtml(p.title) + '</a></h3>' +
+              '<div class="eyebrow eyebrow--muted" style="margin-bottom:10px">' + A.escapeHtml(p.client) + '</div>' +
+              '<p>' + A.escapeHtml(p.summary) + '</p>' +
+              '<div style="display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 18px">' + tags + '</div>' +
+              '<a class="link-arrow" href="' + href + '">View case study' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>' +
+            '</div>' +
+            '<a class="featured-item__visual" href="' + href + '" aria-hidden="true" tabindex="-1">' + A.coverSVG(p, i) + '</a>' +
+          '</article>'
+        );
+      }).join("");
+
+      // Skills
+      document.getElementById("skills-grid").innerHTML = S.map(function (g) {
+        var items = g.items.map(function (it) { return '<span class="tag">' + A.escapeHtml(it) + '</span>'; }).join("");
+        return (
+          '<div class="skill-group">' +
+            '<span class="eyebrow">' + A.escapeHtml(g.title) + '</span>' +
+            '<div class="skill-list">' + items + '</div>' +
+          '</div>'
+        );
+      }).join("");
+
+      A.initNav();
+      A.initReveal();
+    })();
+  </script>
+</body>
+</html>
