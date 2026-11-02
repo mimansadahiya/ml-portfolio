@@ -146,6 +146,9 @@
         var titleHtml = prominent
           ? '<h3 style="font-size:1.35rem;margin:6px 0 10px"><a href="' + href + '">' + A.escapeHtml(p.title) + '</a></h3>'
           : '<h3><a href="' + href + '">' + A.escapeHtml(p.title) + '</a></h3>';
+        var visual = p.preview
+          ? A.videoPreviewHTML(p.preview, { alt: p.title })
+          : A.coverSVG(p, idx);
         return (
           '<article class="featured-item reveal">' +
             '<div>' +
@@ -161,7 +164,7 @@
               '<a class="link-arrow" href="' + href + '">View case study' +
                 '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>' +
             '</div>' +
-            '<a class="featured-item__visual" href="' + href + '" aria-hidden="true" tabindex="-1">' + A.coverSVG(p, idx) + '</a>' +
+            '<a class="featured-item__visual' + (p.preview ? ' featured-item__visual--preview' : '') + '" href="' + href + '" aria-hidden="true" tabindex="-1">' + visual + '</a>' +
           '</article>'
         );
       }
@@ -174,6 +177,7 @@
 
       A.initNav();
       A.initReveal();
+      A.initPreviews();
     })();
   </script>
 </body>

@@ -120,6 +120,46 @@
   }
 
   /* ------------------------------------------------------------------
+     Video preview (autoplay/loop, poster fallback, reduced-motion aware)
+     ------------------------------------------------------------------ */
+  function videoPreviewHTML(preview, opts) {
+    opts = opts || {};
+    var alt = escapeHtml(opts.alt || "Product preview");
+    var poster = preview.poster || "";
+    return (
+      '<div class="preview' + (opts.large ? ' preview--large' : '') + '">' +
+        '<img class="preview__poster" src="' + poster + '" alt="' + alt + '" loading="lazy">' +
+        '<video class="preview__video" autoplay muted loop playsinline preload="metadata" poster="' + poster + '" aria-label="' + alt + '">' +
+          '<source src="' + preview.webm + '" type="video/webm">' +
+          '<source src="' + preview.mp4 + '" type="video/mp4">' +
+        '</video>' +
+      '</div>'
+    );
+  }
+
+  function initPreviews() {
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var vids = document.querySelectorAll(".preview__video");
+    vids.forEach(function (v) {
+      if (reduce) {
+        v.pause();
+        v.removeAttribute("autoplay");
+        v.removeAttribute("loop");
+        return;
+      }
+      // lazy: only play when in viewport
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { v.play(); io.unobserve(v); }
+          });
+        }, { rootMargin: "120px" });
+        io.observe(v);
+      }
+    });
+  }
+
+  /* ------------------------------------------------------------------
      Tag / meta helpers
      ------------------------------------------------------------------ */
   function statusMeta(project) {
@@ -148,9 +188,13 @@
       ? '<h3 style="font-size:1.12rem;margin-top:4px"><a href="' + href + '">' + escapeHtml(project.title) + '</a></h3>'
       : '<h3><a href="' + href + '">' + escapeHtml(project.title) + '</a></h3>';
 
+    var visual = project.preview
+      ? videoPreviewHTML(project.preview, { alt: project.title })
+      : coverSVG(project, idx);
+
     return (
       '<article class="project-card reveal">' +
-        '<a class="project-card__visual" href="' + href + '" aria-hidden="true" tabindex="-1">' + coverSVG(project, idx) + '</a>' +
+        '<a class="project-card__visual' + (project.preview ? ' project-card__visual--preview' : '') + '" href="' + href + '" aria-hidden="true" tabindex="-1">' + visual + '</a>' +
         '<div class="project-card__body">' +
           '<div class="project-card__top">' +
             '<span class="tag tag--accent">' + escapeHtml(categoryLabel(project.category)) + '</span>' +
@@ -411,6 +455,16 @@
       return '<p class="muted">A detailed case study is being prepared for this project.</p>';
     }
     var html = '<div class="lead-in">' + project.caseStudy.lead + '</div>';
+    if (project.preview) {
+      html +=
+        '<div class="case-section">' +
+          '<div class="case-section__head"><span class="eyebrow">Product preview</span></div>' +
+          videoPreviewHTML(project.preview, { large: true, alt: project.title }) +
+          (project.preview.caption
+            ? '<div class="panel__caption" style="color:var(--muted);margin-top:14px">' + escapeHtml(project.preview.caption) + '</div>'
+            : '') +
+        '</div>';
+    }
     html += (project.caseStudy.blocks || []).map(renderBlock).join("");
     return html;
   }
@@ -422,6 +476,8 @@
     escapeHtml: escapeHtml,
     categoryLabel: categoryLabel,
     coverSVG: coverSVG,
+    videoPreviewHTML: videoPreviewHTML,
+    initPreviews: initPreviews,
     projectCard: projectCard,
     renderCaseStudy: renderCaseStudy,
     initNav: initNav,

@@ -605,6 +605,13 @@ window.PROJECTS = [
       code: "https://github.com/mimansadahiya/kinetix-biomechanics",
       live: "https://mimansadahiya.github.io/kinetix-biomechanics/"
     },
+    preview: {
+      mp4: "assets/previews/kinetix-preview.mp4",
+      webm: "assets/previews/kinetix-preview.webm",
+      gif: "assets/previews/kinetix-preview.gif",
+      poster: "assets/previews/kinetix-poster.jpg",
+      caption: "Rendered from the actual MediaPipe analysis output — joint angles, torso lean, and horizontal velocity for a real triple-jump attempt."
+    },
     caseStudy: {
       lead:
         "Traditional technique analysis relies on subjective observation or expensive biomechanics labs. Kinetix is my attempt to make video-based movement analysis accessible to athletes and coaches — starting with the triple jump and basketball jump shot. It is a substantial work in progress, not a finished product.",
