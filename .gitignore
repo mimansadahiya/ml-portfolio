@@ -1,1 +1,6 @@
 .DS_Store
+
+# Proprietary project materials (NDA) — do not commit
+/NVIDIA_Final_Presentation.pdf
+/NVIDIA_Midpoint.pdf
+/Oracle Group 1 Presentation.pdf
