@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project — Mimansa Dahiya</title>
+  <meta name="description" content="Case study — Mimansa Dahiya portfolio.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <meta property="og:title" content="Project — Mimansa Dahiya">
+  <meta property="og:description" content="Case study — Mimansa Dahiya portfolio.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mimansadahiya.github.io/ml-portfolio/project.html">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="nav__brand" href="index.html">Mimansa Dahiya<span>.</span></a>
+      <nav aria-label="Primary">
+        <ul class="nav__links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html" class="is-active">Projects</a></li>
+          <li><a href="experience.html">Experience</a></li>
+        </ul>
+      </nav>
+      <div class="nav__right">
+        <a class="btn btn--ghost nav__cta" href="assets/Mimansa-Dahiya-Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+        <button class="nav__toggle" aria-label="Open menu" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div id="case"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div>
+        <div style="font-family:var(--font-display);font-weight:600;font-size:18px">Mimansa Dahiya</div>
+        <div class="site-footer__meta">© 2026 · Seattle, WA</div>
+      </div>
+      <div class="site-footer__links">
+        <a href="mailto:dahiya.mimansa@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/mimansa-dahiya" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/mimansadahiya" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="assets/Mimansa-Dahiya-Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    (function () {
+      var A = window.App;
+      var P = window.PROJECTS;
+
+      var id = new URLSearchParams(window.location.search).get("project");
+      var project = P.filter(function (p) { return p.id === id; })[0];
+      var root = document.getElementById("case");
+
+      if (!project) {
+        root.innerHTML =
+          '<section class="case-hero"><div class="container">' +
+          '<p class="eyebrow">Project not found</p>' +
+          '<h1 style="font-size:2rem">That project doesn&rsquo;t exist.</h1>' +
+          '<p class="case-hero__sub">The link may be out of date.</p>' +
+          '<div class="case-links"><a class="btn btn--accent" href="projects.html">Browse all projects</a></div>' +
+          '</div></section>';
+        A.initNav();
+        return;
+      }
+
+      document.title = project.title + " — Mimansa Dahiya";
+
+      var typeLabel = { academic: "Academic", independent: "Independent", professional: "Professional" }[project.type] || project.type;
+      var status = project.status === "in-progress"
+        ? '<span class="status-dot status-dot--wip">In progress</span>'
+        : '<span class="status-dot status-dot--active">Completed</span>';
+
+      var metaTags =
+        '<span class="tag tag--accent">' + A.escapeHtml(A.categoryLabel(project.category)) + '</span>' +
+        '<span class="tag">' + typeLabel + '</span>' +
+        status +
+        (project.client ? '<span class="tag">' + A.escapeHtml(project.client) + '</span>' : '') +
+        (project.org && project.type !== "independent" ? '<span class="tag">' + A.escapeHtml(project.org) + '</span>' : '');
+
+      var heroLinks = "";
+      var l = project.links || {};
+      var linkDefs = [
+        { k: "code", label: "Source code", cls: "btn--ghost" },
+        { k: "live", label: "Live demo", cls: "btn--ghost" },
+        { k: "video", label: "Walkthrough", cls: "btn--ghost" }
+      ];
+      var linkHtml = linkDefs.filter(function (d) { return l[d.k]; }).map(function (d) {
+        return '<a class="btn ' + d.cls + '" href="' + l[d.k] + '" target="_blank" rel="noopener noreferrer">' + d.label + ' ↗</a>';
+      }).join("");
+      if (linkHtml) heroLinks = '<div class="case-links">' + linkHtml + '</div>';
+
+      // Related projects (same category first)
+      var related = P.filter(function (p) { return p.id !== project.id; })
+        .sort(function (a, b) {
+          var as = a.category === project.category ? 0 : 1;
+          var bs = b.category === project.category ? 0 : 1;
+          return as - bs;
+        })
+        .slice(0, 3);
+
+      var relatedHtml = related.map(function (r) {
+        return (
+          '<a href="project.html?project=' + encodeURIComponent(r.id) + '">' +
+          '<span class="eyebrow">' + A.escapeHtml(A.categoryLabel(r.category)) + '</span>' +
+          '<h4>' + A.escapeHtml(r.title) + '</h4>' +
+          '<p>' + A.escapeHtml(r.summary) + '</p>' +
+          '</a>'
+        );
+      }).join("");
+
+      var body = project.caseStudy
+        ? A.renderCaseStudy(project)
+        : '<p class="muted">A detailed case study is being prepared for this project.</p>';
+
+      root.innerHTML =
+        '<section class="case-hero">' +
+          '<div class="container">' +
+            '<p class="eyebrow"><a href="projects.html" style="color:inherit">&larr; All projects</a></p>' +
+            '<h1>' + A.escapeHtml(project.title) + '</h1>' +
+            '<p class="case-hero__sub">' + A.escapeHtml(project.summary) + '</p>' +
+            '<div class="case-meta">' + metaTags + '</div>' +
+            heroLinks +
+          '</div>' +
+        '</section>' +
+        '<section class="case-body"><div class="container container--narrow">' + body + '</div></section>' +
+        (relatedHtml
+          ? '<section class="section section--tight"><div class="container">' +
+            '<div class="section-head"><p class="eyebrow">Related</p><h2 style="font-size:1.6rem">Keep exploring.</h2></div>' +
+            '<div class="related">' + relatedHtml + '</div></div></section>'
+          : '');
+
+      A.initNav();
+      A.initReveal();
+    })();
+  </script>
+</body>
+</html>

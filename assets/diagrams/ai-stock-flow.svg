@@ -1,0 +1,56 @@
+<svg viewBox="0 0 720 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Execution flow with caching and retry: enter ticker, cache check with hit and miss branches, fetch data, deterministic quant, sequential agents with pacing and retry, synthesis, cache and render">
+  <defs>
+    <marker id="af" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#b9b0a5"/>
+    </marker>
+  </defs>
+
+  <!-- Enter ticker -->
+  <rect x="220" y="24" width="280" height="48" rx="10" fill="#ffffff" stroke="#d6cfc4"/>
+  <text x="360" y="52" text-anchor="middle" font-family="Inter, sans-serif" font-size="14.5" fill="#211d19">Enter ticker &amp; assumptions</text>
+
+  <line x1="360" y1="72" x2="360" y2="100" stroke="#b9b0a5" stroke-width="1.5" marker-end="url(#af)"/>
+
+  <!-- Cache check -->
+  <rect x="220" y="100" width="280" height="48" rx="10" fill="#ffffff" stroke="#d6cfc4"/>
+  <text x="360" y="128" text-anchor="middle" font-family="Inter, sans-serif" font-size="14.5" fill="#211d19">Local cache check</text>
+
+  <!-- Hit branch (right) -->
+  <line x1="500" y1="124" x2="544" y2="124" stroke="#3f8f5b" stroke-width="1.5"/>
+  <text x="520" y="116" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#3f8f5b">hit</text>
+  <rect x="546" y="100" width="158" height="48" rx="10" fill="#ffffff" stroke="#3f8f5b" stroke-width="1.5"/>
+  <text x="625" y="128" text-anchor="middle" font-family="Inter, sans-serif" font-size="13.5" fill="#211d19">Return cached report</text>
+
+  <!-- Miss branch (down) -->
+  <line x1="360" y1="148" x2="360" y2="176" stroke="#b9b0a5" stroke-width="1.5" marker-end="url(#af)"/>
+  <text x="374" y="166" font-family="JetBrains Mono, monospace" font-size="10" fill="#b9b0a5">miss</text>
+
+  <!-- Fetch -->
+  <rect x="220" y="176" width="280" height="48" rx="10" fill="#ffffff" stroke="#d6cfc4"/>
+  <text x="360" y="204" text-anchor="middle" font-family="Inter, sans-serif" font-size="14.5" fill="#211d19">Fetch data (yfinance)</text>
+
+  <line x1="360" y1="224" x2="360" y2="252" stroke="#b9b0a5" stroke-width="1.5" marker-end="url(#af)"/>
+
+  <!-- Quant -->
+  <rect x="220" y="252" width="280" height="48" rx="10" fill="#ffffff" stroke="#3f8f5b" stroke-width="1.5"/>
+  <text x="360" y="280" text-anchor="middle" font-family="Inter, sans-serif" font-size="14.5" fill="#211d19">Run deterministic quant</text>
+
+  <line x1="360" y1="300" x2="360" y2="328" stroke="#b9b0a5" stroke-width="1.5" marker-end="url(#af)"/>
+
+  <!-- Agents -->
+  <rect x="220" y="328" width="280" height="48" rx="10" fill="#ffffff" stroke="#b04a2c" stroke-width="1.5"/>
+  <text x="360" y="356" text-anchor="middle" font-family="Inter, sans-serif" font-size="14.5" fill="#211d19">Run 7 agents (sequential)</text>
+  <text x="510" y="356" font-family="JetBrains Mono, monospace" font-size="10" fill="#b04a2c">pacing · retry</text>
+
+  <line x1="360" y1="376" x2="360" y2="404" stroke="#b9b0a5" stroke-width="1.5" marker-end="url(#af)"/>
+
+  <!-- Synthesize -->
+  <rect x="220" y="404" width="280" height="48" rx="10" fill="#ffffff" stroke="#d6cfc4"/>
+  <text x="360" y="432" text-anchor="middle" font-family="Inter, sans-serif" font-size="14.5" fill="#211d19">Synthesize report</text>
+
+  <line x1="360" y1="452" x2="360" y2="480" stroke="#b9b0a5" stroke-width="1.5" marker-end="url(#af)"/>
+
+  <!-- Cache + render -->
+  <rect x="220" y="480" width="280" height="48" rx="10" fill="#ffffff" stroke="#3f8f5b" stroke-width="1.5"/>
+  <text x="360" y="508" text-anchor="middle" font-family="Inter, sans-serif" font-size="14.5" fill="#211d19">Cache result &amp; render</text>
+</svg>
